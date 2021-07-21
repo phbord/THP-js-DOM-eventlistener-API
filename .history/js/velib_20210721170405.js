@@ -3,25 +3,20 @@ class Velib {
         this.query = '&rows=6';
         this.url = `https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=${this.query}&facet=station_state&facet=kioskstate&facet=creditcard&facet=overflowactivation&facet=nbbike`;
         this.list = document.getElementById('infos');
-        this.myMap = L.map('map').setView([48.86, 2.3319], 13);
     }
 
     async showVelibStation() {
         setInterval(async () => {
             let data = await this.getData();
             await this.listData(data);
-            console.log('refresh!!!');
+            console.log('interval');
         }, 5000)
     }
 
     async listData(data) {
         this.list.innerHTML = '';
         await data.records.map(record => {
-            const x = record.fields.coordonnees_geo[0];
-            const y = record.fields.coordonnees_geo[1];
             this.list.innerHTML += this.populateTemplate(record);
-            this.showMap(this.myMap);
-            this.showMarker(x, y);
         });
     }
 
@@ -49,7 +44,9 @@ class Velib {
         return result;
     }
 
-    showMap(myMap) {
+    //https://www.openstreetmap.org/#map=13/48.8600/2.3319
+    getMap() {
+        let myMap = L.map('map').setView([48.86, 2.3319], 13);
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
@@ -58,14 +55,11 @@ class Velib {
             zoomOffset: -1,
             accessToken: 'pk.eyJ1IjoicGhib3JkIiwiYSI6ImNrcmRqZWlteDBldXIzMW9lZDZudTJsNDYifQ.gUPMzLa_L-cOXy-vJ1KG4Q'
         }).addTo(myMap);
-    }
-
-    showMarker(x, y) {
-        return L.marker([x, y]).addTo(this.myMap);
+        console.log(myMap,' /// ', L);
     }
 }
 
 
 const velib = new Velib();
 velib.showVelibStation();
-//velib.showMap();
+velib.getMap();

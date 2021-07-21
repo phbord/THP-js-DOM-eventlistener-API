@@ -60,7 +60,7 @@ class Velib {
         }).addTo(myMap);
     }
 
-    showMarker(x, y) {
+    setMarker(x, y) {
         return L.marker([x, y]).addTo(this.myMap);
     }
 }

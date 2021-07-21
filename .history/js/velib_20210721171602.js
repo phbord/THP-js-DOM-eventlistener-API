@@ -21,7 +21,7 @@ class Velib {
             const y = record.fields.coordonnees_geo[1];
             this.list.innerHTML += this.populateTemplate(record);
             this.showMap(this.myMap);
-            this.showMarker(x, y);
+            this.setMarker(x, y);
         });
     }
 
@@ -49,7 +49,9 @@ class Velib {
         return result;
     }
 
+    //https://www.openstreetmap.org/#map=13/48.8600/2.3319
     showMap(myMap) {
+        //let myMap = L.map('map').setView([48.86, 2.3319], 13);
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
@@ -60,7 +62,7 @@ class Velib {
         }).addTo(myMap);
     }
 
-    showMarker(x, y) {
+    setMarker(x, y) {
         return L.marker([x, y]).addTo(this.myMap);
     }
 }

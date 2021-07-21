@@ -21,7 +21,7 @@ class Velib {
             const y = record.fields.coordonnees_geo[1];
             this.list.innerHTML += this.populateTemplate(record);
             this.showMap(this.myMap);
-            this.showMarker(x, y);
+            this.setMarker(x, y);
         });
     }
 
@@ -60,7 +60,7 @@ class Velib {
         }).addTo(myMap);
     }
 
-    showMarker(x, y) {
+    setMarker(x, y) {
         return L.marker([x, y]).addTo(this.myMap);
     }
 }
