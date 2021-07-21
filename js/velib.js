@@ -66,6 +66,7 @@ class Velib {
 }
 
 
-const velib = new Velib();
-velib.showVelibStation();
-//velib.showMap();
+document.addEventListener('DOMContentLoaded', () => {
+    const velib = new Velib();
+    velib.showVelibStation();
+});
