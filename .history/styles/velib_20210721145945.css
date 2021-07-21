@@ -1,0 +1,16 @@
+ul,li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.card {
+    width: 18rem;
+    min-width: 18rem;
+    margin: 0 .2rem .2rem 0;
+}
+
+.map {
+    width: 100%;
+    hei
+}

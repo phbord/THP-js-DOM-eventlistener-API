@@ -1,0 +1,3 @@
+class Velib {
+    constructor()
+}
