@@ -11,7 +11,7 @@ class Velib {
             let data = await this.getData();
             await this.listData(data);
             console.log('refresh!!!');
-        }, 5000)
+        }, 60000)
     }
 
     async listData(data) {
